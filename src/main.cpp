@@ -10,6 +10,6 @@ int main(int argc, char* argv[]) {
         Engine::Instance()->Render();
     }
 
-    Engine::Instance()->Clean();
+    Engine::Instance()->Destroy();
     return EXIT_SUCCESS;
 }

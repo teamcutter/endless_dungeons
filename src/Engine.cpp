@@ -1,5 +1,6 @@
 #pragma once
 #include "../include/Engine/Engine.hpp"
+#include "../include/Graphics/StripeHandler.hpp"
 
 Engine* Engine::_instance = nullptr;
 
@@ -36,12 +37,18 @@ bool Engine::Init()
         return false;
     }
 
+    StripeHandler::Instance()->Create("kitty", "res/assets/luchezar_knight.png");
+
     return running = true;
 }
 
-bool Engine::Clean()
+void Engine::Destroy()
 {
-    return false;
+    StripeHandler::Instance()->Destroy();
+    SDL_DestroyRenderer(_renderer);
+    SDL_DestroyWindow(_window);
+    IMG_Quit();
+    SDL_Quit();
 }
 
 void Engine::Quit()
@@ -56,6 +63,9 @@ void Engine::Update()
 void Engine::Render()
 {
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+    SDL_RenderPresent(_renderer);
+
+    StripeHandler::Instance()->Draw("kitty", 100, 100, 128, 128);
     SDL_RenderPresent(_renderer);
 }
 

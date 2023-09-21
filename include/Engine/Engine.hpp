@@ -16,7 +16,7 @@ public:
     // Base
     static Engine* Instance();
     bool Init();
-    bool Clean();
+    void Destroy();
     void Quit();
 
     // In-game handling
