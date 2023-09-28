@@ -1,6 +1,8 @@
 #pragma once
 #include "../include/Engine/Engine.hpp"
-#include "../include/Graphics/StripeHandler.hpp"
+#include "../include/Graphics/StripeManager.hpp"
+#include "../include/Physics/Vector2D.hpp"
+#include "../include/Physics/Transform.hpp"
 
 Engine* Engine::_instance = nullptr;
 
@@ -10,6 +12,7 @@ Engine* Engine::Instance()
 {
     return _instance = (_instance != nullptr) ? _instance : new Engine();
 }
+
 bool Engine::Init()
 {
     if(SDL_Init(SDL_INIT_VIDEO) != 0 && SDL_Init(IMG_INIT_JPG | IMG_INIT_JPG) != 0) {
@@ -37,14 +40,20 @@ bool Engine::Init()
         return false;
     }
 
-    StripeHandler::Instance()->Create("kitty", "res/assets/luchezar_knight.png");
+    StripeManager::Instance()->Create("kitty", "res/assets/luchezar_knight.png");
+
+    Vector2D v1(1, 1), v2(2, 2), v3;
+    v3 = v1 + v2;
+    v3.Log("V3:");
+
+    
 
     return running = true;
 }
 
 void Engine::Destroy()
 {
-    StripeHandler::Instance()->Destroy();
+    StripeManager::Instance()->Destroy();
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
     IMG_Quit();
@@ -65,7 +74,7 @@ void Engine::Render()
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
     SDL_RenderPresent(_renderer);
 
-    StripeHandler::Instance()->Draw("kitty", 100, 100, 128, 128);
+    StripeManager::Instance()->Draw("kitty", 100, 100, 128, 128);
     SDL_RenderPresent(_renderer);
 }
 

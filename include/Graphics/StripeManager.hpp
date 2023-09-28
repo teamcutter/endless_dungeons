@@ -2,14 +2,14 @@
 #include <map>
 #include <SDL2/SDL_image.h>
 
-class StripeHandler {
+class StripeManager {
 private:
-    StripeHandler();
-    static StripeHandler* _instance;
+    StripeManager();
+    static StripeManager* _instance;
     std::map<std::string, SDL_Texture*> _stripes;
 
 public:
-    static StripeHandler* Instance();
+    static StripeManager* Instance();
 
     bool Create(std::string id, std::string path);
     void Delete(std::string id);

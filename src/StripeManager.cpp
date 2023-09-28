@@ -1,17 +1,17 @@
 #pragma once
-#include "../include/Graphics/StripeHandler.hpp"
+#include "../include/Graphics/StripeManager.hpp"
 #include "../include/Engine/Engine.hpp"
 
-StripeHandler* StripeHandler::_instance = nullptr;
+StripeManager* StripeManager::_instance = nullptr;
 
-StripeHandler::StripeHandler() {};
+StripeManager::StripeManager() {};
 
-StripeHandler* StripeHandler::Instance() 
+StripeManager* StripeManager::Instance() 
 {
-    return _instance = (_instance != nullptr) ? _instance : new StripeHandler();
+    return _instance = (_instance != nullptr) ? _instance : new StripeManager();
 }
 
-bool StripeHandler::Create(std::string id, std::string path) {
+bool StripeManager::Create(std::string id, std::string path) {
     // c_str() because SDL written on C and param is const char*
     SDL_Surface* surface = IMG_Load(path.c_str());
     if(surface == nullptr){
@@ -30,20 +30,20 @@ bool StripeHandler::Create(std::string id, std::string path) {
     return true;
 }
 
-void StripeHandler::Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip)
+void StripeManager::Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip)
 {
     SDL_Rect src = {0, 0, width, height};
     SDL_Rect dist = {x, y, width, height};
     SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _stripes[id], &src, &dist, 0, nullptr, flip);
 }
 
-void StripeHandler::Delete(std::string id)
+void StripeManager::Delete(std::string id)
 {
     SDL_DestroyTexture(_stripes[id]);
     _stripes.erase(id);
 }
 
-void StripeHandler::Destroy(){
+void StripeManager::Destroy(){
     for(auto [_, v]: _stripes) {
         SDL_DestroyTexture(v);
     }
