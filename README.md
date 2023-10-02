@@ -1,4 +1,4 @@
-# endless_dungeons
+# Endless Dungeons
 Rougle-like game.
 
 # Stripes from:
