@@ -16,6 +16,17 @@ void Transform::Translate(Vector2D v)
     this->_y += v.GetY();
 }
 
-void Transform::Log(std::string message) {
+float Transform::GetX()
+{
+    return this->_x;
+}
+
+float Transform::GetY()
+{
+    return this->_y;
+}
+
+void Transform::Log(std::string message)
+{
     SDL_Log("Message:\t%s\tX: %f\tY: %f", message.c_str(), this->_x, this->_y);
-} 
+}

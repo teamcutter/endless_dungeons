@@ -3,8 +3,7 @@
 #include "IObject.hpp"
 #include "../Physics/Transform.hpp"
 
-struct Properties
-{
+struct Properties {
 public:
     int width, height;
     float x, y;
@@ -23,19 +22,19 @@ public:
 
 
 class GameObject: public IObject {
+protected:
+    Transform* _transform;
+    int _width, _height;
+    std::string _stripeID;
+    SDL_RendererFlip _flip;
+    
 public:
     GameObject(Properties* properties): _stripeID(properties->stripeID), _width(properties->width),
     _height(properties->height), _flip(properties->flip) {
         _transform = new Transform(properties->x, properties->y);
     }
 
-    virtual void Draw() override;
-    virtual void Update(float dt) override;
-    virtual void Clean() override;
-
-protected:
-    Transform* _transform;
-    int _width, _height;
-    std::string _stripeID;
-    SDL_RendererFlip _flip;
+    virtual void Draw() = 0;
+    virtual void Update(float dt) = 0;
+    virtual void Clean() = 0;
 };

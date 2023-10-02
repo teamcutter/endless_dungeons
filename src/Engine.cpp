@@ -1,10 +1,10 @@
 #pragma once
 #include "../include/Engine/Engine.hpp"
-#include "../include/Graphics/StripeManager.hpp"
-#include "../include/Physics/Vector2D.hpp"
-#include "../include/Physics/Transform.hpp"
+#include "../include/Graphics/SpriteManager.hpp"
+#include "../include/Characters/Knight.hpp"
 
 Engine* Engine::_instance = nullptr;
+Knight* player = nullptr;
 
 Engine::Engine(){};
 
@@ -40,20 +40,22 @@ bool Engine::Init()
         return false;
     }
 
-    StripeManager::Instance()->Create("kitty", "res/assets/luchezar_knight.png");
-
-    Vector2D v1(1, 1), v2(2, 2), v3;
-    v3 = v1 + v2;
-    v3.Log("V3:");
-
+    SpriteManager::Instance()->Create("player", "res/assets/knight/sprites/_Idle.png");
+    // 120x80 - for only Knight's sprites
+    player = new Knight(new Properties(
+        "player",
+        100,
+        200,
+        120,
+        80
+    ));
     
-
     return running = true;
 }
 
 void Engine::Destroy()
 {
-    StripeManager::Instance()->Destroy();
+    SpriteManager::Instance()->Destroy();
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
     IMG_Quit();
@@ -67,14 +69,15 @@ void Engine::Quit()
 
 void Engine::Update()
 {
+    player->Update(0);
 }
 
 void Engine::Render()
 {
-    SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(_renderer, 10, 41, 89, 255);
     SDL_RenderPresent(_renderer);
 
-    StripeManager::Instance()->Draw("kitty", 100, 100, 128, 128);
+    player->Draw();
     SDL_RenderPresent(_renderer);
 }
 
