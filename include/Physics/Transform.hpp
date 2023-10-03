@@ -13,6 +13,8 @@ public:
     void TranslateY(float y);
     void Translate(Vector2D v);
 
+    void SetX(float x);
+    void SetY(float y);
     float GetX();
     float GetY();
 };

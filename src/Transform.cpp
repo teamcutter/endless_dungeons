@@ -16,6 +16,16 @@ void Transform::Translate(Vector2D v)
     this->_y += v.GetY();
 }
 
+void Transform::SetX(float x)
+{
+    this->_x = x;
+}
+
+void Transform::SetY(float y)
+{
+    this->_y = y;
+}
+
 float Transform::GetX()
 {
     return this->_x;

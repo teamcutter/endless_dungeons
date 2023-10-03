@@ -74,8 +74,8 @@ void Engine::Update()
 
 void Engine::Render()
 {
-    SDL_SetRenderDrawColor(_renderer, 10, 41, 89, 255);
-    SDL_RenderPresent(_renderer);
+    SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+    SDL_RenderClear(_renderer);
 
     player->Draw();
     SDL_RenderPresent(_renderer);

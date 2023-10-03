@@ -5,17 +5,23 @@
 
 Knight::Knight(Properties *props) : Character(props)
 {
+    this->_rigidbody = new RigidBody();
     this->_animation = new Animation();
     this->_animation->SetProperties(this->_id, 0, 10, 80);
 }
 
-void Knight::Draw()
+void Knight::Draw() 
 {  
     this->_animation->Draw(this->_transform->GetX(), this->_transform->GetY(), this->_width, this->_height);
 }
 
 void Knight::Update(float dt)
 {
+    this->_rigidbody->Update(0.4); // now it's hardcoded
+
+    this->_transform->TranslateX(this->_rigidbody->GetPosition().GetX());
+    this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
+
     this->_animation->Update();
 }
 

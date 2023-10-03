@@ -12,9 +12,14 @@ public:
     float GetX();
     float GetY();
 
+    // Setters 
+    void SetX(float x);
+    void SetY(float y);
+
     // Operators
     Vector2D operator+(const Vector2D& v2) const;
     Vector2D operator-(const Vector2D& v2) const;
+    Vector2D operator*(const float scal) const;
 
     // Debugging
     void Log(std::string message);
