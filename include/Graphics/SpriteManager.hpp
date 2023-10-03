@@ -6,7 +6,7 @@ class SpriteManager {
 private:
     SpriteManager();
     static SpriteManager* _instance;
-    std::map<std::string, SDL_Texture*> _stripes;
+    std::map<std::string, SDL_Texture*> _sprites;
 
 public:
     static SpriteManager* Instance();

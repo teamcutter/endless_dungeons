@@ -5,22 +5,21 @@
 
 Knight::Knight(Properties *props) : Character(props)
 {
-    this->_row = 0;
-    this->_frameCount = 10;
-    this->_animationSpeed = 80;
+    this->_animation = new Animation();
+    this->_animation->SetProperties(this->_id, 0, 10, 80);
 }
 
 void Knight::Draw()
 {  
-    SpriteManager::Instance()->DrawFrame(this->_stripeID, this->_transform->GetX(), this->_transform->GetY(), this->_width, this->_height, this->_row, this->_frame);
+    this->_animation->Draw(this->_transform->GetX(), this->_transform->GetY(), this->_width, this->_height);
 }
 
 void Knight::Update(float dt)
 {
-    this->_frame = (SDL_GetTicks64() / this->_animationSpeed) % this->_frameCount;
+    this->_animation->Update();
 }
 
-void Knight::Clean()
+void Knight::Delete()
 {
-    SpriteManager::Instance()->Delete(this->_stripeID);
+    SpriteManager::Instance()->Delete(this->_id);
 }

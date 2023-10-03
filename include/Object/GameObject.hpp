@@ -7,11 +7,11 @@ struct Properties {
 public:
     int width, height;
     float x, y;
-    std::string stripeID;
+    std::string _id;
     SDL_RendererFlip flip;
 
-    Properties(std::string stripeID, float x, float y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE) {
-        this->stripeID = stripeID;
+    Properties(std::string _id, float x, float y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE) {
+        this->_id = _id;
         this->x = x;
         this->y = y;
         this->width = width;
@@ -25,16 +25,16 @@ class GameObject: public IObject {
 protected:
     Transform* _transform;
     int _width, _height;
-    std::string _stripeID;
+    std::string _id;
     SDL_RendererFlip _flip;
     
 public:
-    GameObject(Properties* properties): _stripeID(properties->stripeID), _width(properties->width),
+    GameObject(Properties* properties): _id(properties->_id), _width(properties->width),
     _height(properties->height), _flip(properties->flip) {
         _transform = new Transform(properties->x, properties->y);
     }
 
     virtual void Draw() = 0;
     virtual void Update(float dt) = 0;
-    virtual void Clean() = 0;
+    virtual void Delete() = 0;
 };

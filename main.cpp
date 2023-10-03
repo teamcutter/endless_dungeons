@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/Engine/Engine.hpp"
+#include "include/Engine/Engine.hpp"
 
 int main(int argc, char* argv[]) {
 

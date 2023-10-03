@@ -25,7 +25,7 @@ bool SpriteManager::Create(std::string id, std::string path) {
         return false; 
     }
 
-    _stripes[id] = stripe;
+    _sprites[id] = stripe;
 
     return true;
 }
@@ -34,27 +34,27 @@ void SpriteManager::Draw(std::string id, float x, float y, int width, int height
 {
     SDL_Rect src = {0, 0, width, height};
     SDL_Rect dist = {x, y, width, height};
-    SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _stripes[id], &src, &dist, 0, nullptr, flip);
+    SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[id], &src, &dist, 0, nullptr, flip);
 }
 
 void SpriteManager::DrawFrame(std::string id, float x, float y, int width, int height, int row, int frame, SDL_RendererFlip flip)
 {
     SDL_Rect src = {width*frame, height*row, width, height};
     SDL_Rect dist = {x, y, width, height};
-    SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _stripes[id], &src, &dist, 0, nullptr, flip);
+    SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[id], &src, &dist, 0, nullptr, flip);
 }
 
 void SpriteManager::Delete(std::string id)
 {
-    SDL_DestroyTexture(_stripes[id]);
-    _stripes.erase(id);
+    SDL_DestroyTexture(_sprites[id]);
+    _sprites.erase(id);
 }
 
 void SpriteManager::Destroy(){
-    for(auto [_, v]: _stripes) {
+    for(auto [_, v]: _sprites) {
         SDL_DestroyTexture(v);
     }
-    _stripes.clear();
+    _sprites.clear();
 
     SDL_Log("Stripes destroyed.");
 }
