@@ -1,6 +1,7 @@
 #pragma once
 #include "../include/Engine/Engine.hpp"
 #include "../include/Graphics/SpriteManager.hpp"
+#include "../include/Keyboard/KeyboardHandler.hpp"
 #include "../include/Characters/Knight.hpp"
 
 Engine* Engine::_instance = nullptr;
@@ -69,6 +70,10 @@ void Engine::Quit()
 
 void Engine::Update()
 {
+    if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_W)) {
+        SDL_Log("W!");
+    }
+
     player->Update(0);
 }
 
@@ -83,17 +88,7 @@ void Engine::Render()
 
 void Engine::Events()
 {
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    switch(event.type)
-    {
-    case SDL_QUIT:
-        Quit();
-        break;
-    
-    default:
-        break;
-    }
+    KeyboardHandler::Instance()->Listen();
 }
 bool Engine::isRunning()
 {
