@@ -50,6 +50,8 @@ bool Engine::Init()
         120,
         80
     ));
+
+    SpriteManager::Instance()->Create("player_run_state", "res/assets/knight/sprites/_Run.png");
     
     return running = true;
 }

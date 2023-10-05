@@ -4,6 +4,12 @@
 #define MASS 1.0f
 #define G 9.8f
 
+#define FORWARD 1
+#define BACKWARD -1
+
+#define UP -1
+#define DOWN 1
+
 class RigidBody {
 private:
     float _mass, _gravity;
