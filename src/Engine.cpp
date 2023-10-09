@@ -3,6 +3,7 @@
 #include "../include/Graphics/SpriteManager.hpp"
 #include "../include/Keyboard/KeyboardHandler.hpp"
 #include "../include/Characters/Knight.hpp"
+#include "../include/Graphics/Timer/Timer.hpp"
 
 Engine* Engine::_instance = nullptr;
 Knight* player = nullptr;
@@ -73,7 +74,8 @@ void Engine::Quit()
 
 void Engine::Update()
 {
-    player->Update(0);
+    float dt = Timer::Instance()->GetDeltaTime();
+    player->Update(dt);
 }
 
 void Engine::Render()

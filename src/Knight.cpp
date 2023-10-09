@@ -41,7 +41,7 @@ void Knight::Update(float dt)
     }
 
 
-    this->_rigidbody->Update(0.4); // now it's hardcoded
+    this->_rigidbody->Update(dt); 
 
     this->_transform->TranslateX(this->_rigidbody->GetPosition().GetX());
 
