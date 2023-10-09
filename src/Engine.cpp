@@ -52,6 +52,7 @@ bool Engine::Init()
     ));
 
     SpriteManager::Instance()->Create("player_run_state", "res/assets/knight/sprites/_Run.png");
+    SpriteManager::Instance()->Create("player_jump_state", "res/assets/knight/sprites/_Jump.png");
     
     return running = true;
 }
@@ -72,10 +73,6 @@ void Engine::Quit()
 
 void Engine::Update()
 {
-    if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_W)) {
-        SDL_Log("W!");
-    }
-
     player->Update(0);
 }
 

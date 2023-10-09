@@ -29,11 +29,21 @@ void Knight::Update(float dt)
         this->_rigidbody->ApplyForceX(10*BACKWARD);
         this->_animation->SetProperties("player_run_state", 0, 8, 100, SDL_FLIP_HORIZONTAL);
     }
+    if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_W)) {
+        this->_rigidbody->ApplyForceY(25*UP);
+        this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
+        this->_animation->SetProperties("player_run_state", 0, 8, 100);
+    }
+    if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_S)) {
+        this->_rigidbody->ApplyForceY(10*DOWN);
+        this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
+        this->_animation->SetProperties("player_run_state", 0, 8, 100);
+    }
+
 
     this->_rigidbody->Update(0.4); // now it's hardcoded
 
     this->_transform->TranslateX(this->_rigidbody->GetPosition().GetX());
-    // this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
 
     this->_animation->Update();
 }

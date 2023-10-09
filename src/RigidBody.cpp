@@ -70,7 +70,7 @@ void RigidBody::Update(float dt)
     // F = ma => a = F/m
     this->_acceleration.SetX((this->_force.GetX() + this->_friction.GetX()) / this->_mass);
     // F = ma => a = F/m => a + g
-    this->_acceleration.SetY(this->_gravity + this->_force.GetY() / this->_mass);
+    this->_acceleration.SetY((this->_gravity + this->_force.GetY()) / this->_mass);
     this->_velocity = this->_acceleration * dt;
     this->_pos = this->_velocity * dt;
 }
