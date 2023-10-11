@@ -44,6 +44,12 @@ void SpriteManager::DrawFrame(std::string id, float x, float y, int width, int h
     SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[id], &src, &dist, 0, nullptr, flip);
 }
 
+void SpriteManager::DrawTile(std::string tilesetID, int tileSize, float x, float y, int row, int frame, SDL_RendererFlip flip){
+    SDL_Rect src = {tileSize*frame, tileSize*row, tileSize, tileSize};
+    SDL_Rect dist = {x, y, tileSize, tileSize};
+    SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[tilesetID], &src, &dist, 0, 0, flip);
+}
+
 void SpriteManager::Delete(std::string id)
 {
     SDL_DestroyTexture(_sprites[id]);

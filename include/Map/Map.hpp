@@ -10,5 +10,6 @@ public:
     std::vector<Layer*> GetMapLayers();
     
 private:
+    friend class MapParser;
     std::vector<Layer*> _mapLayers;
 };

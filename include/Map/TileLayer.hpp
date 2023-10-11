@@ -4,7 +4,7 @@
 #include <vector>
 
 struct Tileset {
-    int First, LastID, RowCount, ColCount, TileCount, TileSize;
+    int FirstID, LastID, RowCount, ColCount, TileCount, TileSize;
     std::string Name, Src;
 };
 

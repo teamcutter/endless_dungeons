@@ -6,7 +6,7 @@
 #include "../../Vendor/tinyxml/tinyxml.h"
 
 class MapParser {
-private:
+public:
     MapParser(){}
     static MapParser* _instance;
     std::map<std::string, Map*> _maps;
