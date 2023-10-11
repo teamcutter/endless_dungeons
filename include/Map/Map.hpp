@@ -8,6 +8,7 @@ public:
     void Update();
 
     std::vector<Layer*> GetMapLayers();
+    
 private:
     std::vector<Layer*> _mapLayers;
 };
