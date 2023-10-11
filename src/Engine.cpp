@@ -47,7 +47,7 @@ bool Engine::Init()
         std::cout<< "Faild to load map" << std::endl;
     }
 
-    _levelMap = MapParser::Instance()->GetMap("level1");
+    _levelMap = MapParser::Instance()->GetMap("map");
 
     SpriteManager::Instance()->Create("player", "res/assets/knight/sprites/_Idle.png");
     // 120x80 - for only Knight's sprites

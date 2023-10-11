@@ -10,7 +10,7 @@ MapParser *MapParser::Instance()
 
 bool MapParser::Load()
 {
-   return Parse("level1", "res/assets/maps/map1.tmx");
+   return Parse("map", "res/assets/maps/map1.tmx");
 }
 
 
