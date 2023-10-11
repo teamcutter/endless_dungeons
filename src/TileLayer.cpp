@@ -2,12 +2,11 @@
 #include "../include/Map/TileLayer.hpp"
 #include "../include/Graphics/SpriteManager.hpp"
 
-TileLayer::TileLayer(int tileSize, int rowCount, int colCount, TileMap tileMap, TilesetList tilesetList): _tilesetList(tileSize) 
-{
-    this->_rowCount = rowCount;
-    this->_colCount = colCount;
-    this->_tileMap = tileMap;
-    this->_tilesetList = tilesetList;
+TileLayer::TileLayer(int tileSize, int rowCount, int colCount, TileMap tileMap, TilesetList tilesetList): _tileSize(tileSize),
+_colCount(colCount), _rowCount(rowCount), _tileMap(tileMap), _tilesetList(tilesetList){
+
+    for(unsigned int i=0; i < _tilesetList.size(); i++)
+        SpriteManager::Instance()->Create(_tilesetList[i].Name, "assets/maps/" + _tilesetList[i].Src);
 }
 
 void TileLayer::Render() 

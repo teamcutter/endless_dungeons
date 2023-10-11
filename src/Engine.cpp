@@ -4,6 +4,7 @@
 #include "../include/Keyboard/KeyboardHandler.hpp"
 #include "../include/Characters/Knight.hpp"
 #include "../include/Graphics/Timer/Timer.hpp"
+#include "../include/Map/MapParser.hpp" 
 
 Engine* Engine::_instance = nullptr;
 Knight* player = nullptr;
@@ -42,6 +43,12 @@ bool Engine::Init()
         return false;
     }
 
+    if(MapParser::Instance()->Load()) {
+        std::cout<< "Faild to load map" << std::endl;
+    }
+
+    _levelMap = MapParser::Instance()->GetMap("level1");
+
     SpriteManager::Instance()->Create("player", "res/assets/knight/sprites/_Idle.png");
     // 120x80 - for only Knight's sprites
     player = new Knight(new Properties(
@@ -75,6 +82,7 @@ void Engine::Quit()
 void Engine::Update()
 {
     float dt = Timer::Instance()->GetDeltaTime();
+    _levelMap->Update();
     player->Update(dt);
 }
 
@@ -82,6 +90,8 @@ void Engine::Render()
 {
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
     SDL_RenderClear(_renderer);
+
+    _levelMap->Render();
 
     player->Draw();
     SDL_RenderPresent(_renderer);

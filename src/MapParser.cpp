@@ -1,6 +1,8 @@
 #pragma once
 #include "../include/Map/MapParser.hpp"
 
+MapParser* MapParser::_instance = nullptr;
+
 MapParser *MapParser::Instance()
 {
     return _instance = (_instance != nullptr) ? _instance : new MapParser();
@@ -12,9 +14,9 @@ bool MapParser::Load()
 }
 
 
-Map *MapParser::GetMaps()
+Map *MapParser::GetMap(std::string id)
 {
-    return nullptr;
+    return _maps[id];
 }
 
 bool MapParser::Parse(std::string id, std::string src)
@@ -87,7 +89,7 @@ TileLayer *MapParser::ParseTileLayer(TiXmlElement *xmlLayer, TilesetList tiles, 
 
     TileMap tilemap(rowCount, std::vector<int>(colCount, 0));
 
-    for(int row = 0; row = rowCount; row++) {
+    for(int row = 0; row < rowCount; row++) {
         for(int col = 0; col = colCount; col++) {
             getline(iss, id, ',');
             std::stringstream convertor(id);
@@ -103,5 +105,9 @@ TileLayer *MapParser::ParseTileLayer(TiXmlElement *xmlLayer, TilesetList tiles, 
 
 void MapParser::Clean()
 {
-    
+    for(auto it = _maps.begin(); it != _maps.end(); it++) {
+        it->second = nullptr;
+    }
+
+    _maps.clear();
 }

@@ -20,5 +20,5 @@ public:
     bool Load();
     void Clean();
 
-    Map* GetMaps();
+    Map* GetMap(std::string id);
 };
