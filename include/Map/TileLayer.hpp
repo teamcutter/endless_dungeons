@@ -8,13 +8,19 @@ struct Tileset {
     std::string Name, Src;
 };
 
-using TileSet = std::vector<Tileset>;
+using TilesetList = std::vector<Tileset>;
 using TileMap = std::vector<std::vector<int>>;
 
-class TileLayer {
+class TileLayer: public Layer {
 private:
-    int _titleSize, _rowCount, _colCount;
+    int _tileSize, _rowCount, _colCount;
+    TileMap _tileMap;
+    TilesetList _tilesetList;
 
 public:
-    TileLayer(){}
+    TileLayer(int tileSize, int rowCount, int colCount, TileMap tileMap, TilesetList tilesetList);
+
+    virtual void Render();
+    virtual void Update();
+    TileMap GetTileMap();
 };
