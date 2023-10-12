@@ -43,7 +43,7 @@ bool Engine::Init()
         return false;
     }
 
-    if(MapParser::Instance()->Load()) {
+    if(!MapParser::Instance()->Load()) {
         std::cout<< "Faild to load map" << std::endl;
     }
 

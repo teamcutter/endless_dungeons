@@ -69,7 +69,9 @@ Tileset MapParser::ParseTileset(TiXmlElement *xmlTileset)
 
     TiXmlElement* img = xmlTileset->FirstChildElement();
     tileset.Src = img->Attribute("source");
-    std::cout<<"hello"<<std::endl;
+    std::cout<<tileset.RowCount<<std::endl;
+    std::cout<<tileset.ColCount<<std::endl;
+    std::cout<<tileset.LastID<<std::endl;
     return tileset;
 }
 
@@ -90,7 +92,7 @@ TileLayer *MapParser::ParseTileLayer(TiXmlElement *xmlLayer, TilesetList tiles, 
     TileMap tilemap(rowCount, std::vector<int>(colCount, 0));
 
     for(int row = 0; row < rowCount; row++) {
-        for(int col = 0; col = colCount; col++) {
+        for(int col = 0; col < colCount; col++) {
             getline(iss, id, ',');
             std::stringstream convertor(id);
             convertor >> tilemap[row][col];

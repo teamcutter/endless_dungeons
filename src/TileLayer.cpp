@@ -1,12 +1,13 @@
 #pragma once
 #include "../include/Map/TileLayer.hpp"
 #include "../include/Graphics/SpriteManager.hpp"
+#include "iostream"
 
 TileLayer::TileLayer(int tileSize, int rowCount, int colCount, TileMap tileMap, TilesetList tilesetList): _tileSize(tileSize),
 _colCount(colCount), _rowCount(rowCount), _tileMap(tileMap), _tilesetList(tilesetList){
 
     for(unsigned int i=0; i < _tilesetList.size(); i++)
-        SpriteManager::Instance()->Create(_tilesetList[i].Name, "assets/maps/" + _tilesetList[i].Src);
+        SpriteManager::Instance()->Create(_tilesetList[i].Name, "res/assets/maps/" + _tilesetList[i].Src);
 }
 
 void TileLayer::Render() 
@@ -36,7 +37,7 @@ void TileLayer::Render()
                 int tileRow = tileID/ts.ColCount;
                 int tileCol = tileID - tileRow*ts.ColCount-1;
 
-                // if this tile is on the las column
+                // if this tile is on the last column
                 if(tileID % ts.ColCount == 0){
                     tileRow--;
                     tileCol = ts.ColCount - 1;
