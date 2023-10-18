@@ -15,16 +15,17 @@ Camera *Camera::Instance()
 
 SDL_Rect Camera::GetViewArea()
 {
-    return SDL_Rect();
+    return _viewArea;
 }
 
 Vector2D Camera::GetPosition()
 {
-    return Vector2D();
+    return _pos;
 }
 
 void Camera::SetTarget(Point *target)
 {
+    _target = target;
 }
 
 void Camera::Update(float dt)
