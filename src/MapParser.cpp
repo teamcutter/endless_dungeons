@@ -69,9 +69,6 @@ Tileset MapParser::ParseTileset(TiXmlElement *xmlTileset)
 
     TiXmlElement* img = xmlTileset->FirstChildElement();
     tileset.Src = img->Attribute("source");
-    std::cout<<tileset.RowCount<<std::endl;
-    std::cout<<tileset.ColCount<<std::endl;
-    std::cout<<tileset.LastID<<std::endl;
     return tileset;
 }
 

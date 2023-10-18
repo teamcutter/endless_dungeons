@@ -1,6 +1,7 @@
 #pragma once
 #include "../include/Graphics/SpriteManager.hpp"
 #include "../include/Engine/Engine.hpp"
+#include "../include/Camera/Camera.hpp"
 
 SpriteManager* SpriteManager::_instance = nullptr;
 
@@ -33,20 +34,24 @@ bool SpriteManager::Create(std::string id, std::string path) {
 void SpriteManager::Draw(std::string id, float x, float y, int width, int height, SDL_RendererFlip flip)
 {
     SDL_Rect src = {0, 0, width, height};
-    SDL_Rect dist = {x, y, width, height};
+    Vector2D camera = Camera::Instance()->GetPosition();
+    SDL_Rect dist = {x - camera.GetX(), y - camera.GetY(), width, height};
     SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[id], &src, &dist, 0, nullptr, flip);
 }
 
 void SpriteManager::DrawFrame(std::string id, float x, float y, int width, int height, int row, int frame, SDL_RendererFlip flip)
 {
     SDL_Rect src = {width*frame, height*row, width, height};
-    SDL_Rect dist = {x, y, width, height};
+    Vector2D camera = Camera::Instance()->GetPosition();
+    SDL_Rect dist = {x - camera.GetX(), y - camera.GetY(), width, height};
     SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[id], &src, &dist, 0, nullptr, flip);
 }
 
 void SpriteManager::DrawTile(std::string tilesetID, int tileSize, float x, float y, int row, int frame, SDL_RendererFlip flip){
     SDL_Rect src = {tileSize*frame, tileSize*row, tileSize, tileSize};
-    SDL_Rect dist = {x, y, tileSize, tileSize};
+    Vector2D camera = Camera::Instance()->GetPosition();
+    // x - camera.GetX() because camera moves in both directions and when x > camera x then is right, x < camera x is left
+    SDL_Rect dist = {x - camera.GetX(), y - camera.GetY(), tileSize, tileSize};
     SDL_RenderCopyEx(Engine::Instance()->GetRenderer(), _sprites[tilesetID], &src, &dist, 0, 0, flip);
 }
 

@@ -34,16 +34,28 @@ void Knight::Update(float dt)
         this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
         this->_animation->SetProperties("player_run_state", 0, 8, 100);
     }
+    if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_W) && KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_A)) {
+        this->_rigidbody->ApplyForceY(25*UP);
+        this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
+        this->_animation->SetProperties("player_run_state", 0, 8, 100, SDL_FLIP_HORIZONTAL);
+    }
     if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_S)) {
         this->_rigidbody->ApplyForceY(10*DOWN);
         this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
         this->_animation->SetProperties("player_run_state", 0, 8, 100);
     }
-
+    if(KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_S) && KeyboardHandler::Instance()->GetKey(SDL_SCANCODE_A)) {
+        this->_rigidbody->ApplyForceY(10*DOWN);
+        this->_transform->TranslateY(this->_rigidbody->GetPosition().GetY());
+        this->_animation->SetProperties("player_run_state", 0, 8, 100, SDL_FLIP_HORIZONTAL);
+    }
 
     this->_rigidbody->Update(dt); 
 
     this->_transform->TranslateX(this->_rigidbody->GetPosition().GetX());
+
+    this->_origin->SetX(this->_transform->GetX() + this->_width / 2);
+    this->_origin->SetY(this->_transform->GetY() + this->_height / 2);
 
     this->_animation->Update();
 }

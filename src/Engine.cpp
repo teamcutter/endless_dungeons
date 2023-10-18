@@ -5,11 +5,12 @@
 #include "../include/Characters/Knight.hpp"
 #include "../include/Graphics/Timer/Timer.hpp"
 #include "../include/Map/MapParser.hpp" 
+#include "../include/Camera/Camera.hpp" 
 
 Engine* Engine::_instance = nullptr;
 Knight* player = nullptr;
 
-Engine::Engine(){};
+Engine::Engine(){}
 
 Engine* Engine::Instance()
 {
@@ -19,17 +20,18 @@ Engine* Engine::Instance()
 bool Engine::Init()
 {
     if(SDL_Init(SDL_INIT_VIDEO) != 0 && SDL_Init(IMG_INIT_JPG | IMG_INIT_JPG) != 0) {
-
         SDL_Log("Initialization failed: %s", SDL_GetError());
         return false;
     }
+
+    SDL_WindowFlags window_flags = (SDL_WindowFlags) (SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 
     _window = SDL_CreateWindow("Test", 
     SDL_WINDOWPOS_CENTERED, 
     SDL_WINDOWPOS_CENTERED, 
     SCREEN_WIDTH, 
     SCREEN_HEIGHT, 
-    0);
+    window_flags);
 
     if(_window == nullptr) {
         SDL_Log("Window creation failed: %s", SDL_GetError());
@@ -62,6 +64,8 @@ bool Engine::Init()
     SpriteManager::Instance()->Create("player_run_state", "res/assets/knight/sprites/_Run.png");
     SpriteManager::Instance()->Create("player_jump_state", "res/assets/knight/sprites/_Jump.png");
     
+    Camera::Instance()->SetTarget(player->GetOrigin());
+
     return running = true;
 }
 
@@ -82,8 +86,9 @@ void Engine::Quit()
 void Engine::Update()
 {
     float dt = Timer::Instance()->GetDeltaTime();
-    _levelMap->Update();
     player->Update(dt);
+    _levelMap->Update();
+    Camera::Instance()->Update(dt);
 }
 
 void Engine::Render()
